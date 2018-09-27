@@ -1,0 +1,24 @@
+{% extends 'estoque/base.html' %}
+{#
+{% block comment %}
+    {{ abacate|yesno:"Yes,No" }}
+    {{ abacate|yesno:"Yes,No"|title }}
+    {{ abacate|yesno:"Yes,No"|length }}
+    {{ abacate|yesno:"Yes,No"|default:"---" }}
+    {% if abacate %}
+        ABACATE!
+    {% endif %}
+{% endblock comment %}
+#}
+
+{% block content %}
+    {{ block.super }}
+    <ul class="list-group" style="">
+        {% for obj in object_list %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ obj.nome }}
+                <span class="badge badge-primary badge-pill"></span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

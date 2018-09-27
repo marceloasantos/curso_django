@@ -1,0 +1,40 @@
+{% extends 'estoque/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<form method="post" class="form">
+    {% csrf_token %} {{ form.non_field_errors }}
+    <div>
+        {{ form.nome.errors }} {{ form.nome.label_tag }} {{ form.nome }}
+        <small id="nome_taken"></small>
+    </div>
+    <div>
+        {{ form.idade.errors }} {{ form.idade.label_tag }} {{ form.idade }}
+    </div>
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        Submit
+    </button>
+    {% endbuttons %}
+</form>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript">
+$("#id_nome").keydown(function() {
+    var nome = $(this).val();
+    $.ajax({
+    url: '{% url "autor-taken" %}',
+        data: {
+        'nome': nome},
+        dataType: 'json',
+        success: function (data) {
+            if (data.is_taken) {
+                $('#nome_taken').html('Já castrado');
+            } else {
+                $('#nome_taken').html('Nome válido');
+            }
+        }
+    });
+});
+</script>
+{% endblock js %}

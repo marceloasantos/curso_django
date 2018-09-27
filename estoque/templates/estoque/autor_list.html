@@ -1,0 +1,41 @@
+{% extends 'estoque/base.html' %}
+{% block content %}
+
+<!-- campo de busca --!>
+<div class = "container">
+    <form method="GET">
+        <div class="">
+            {{ form.as_p }} 
+            <button type="submit" class="btn btn-submit"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+</div>
+<!-- fim campo de busca --!>
+
+<!-- form cadastro
+<div>
+    <form id="autor-form" action="{% url 'autor-create' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+fim form cadastro --!>
+
+<!-- list-group dos autores --!>
+<br>
+<h4>{{ page_info }}</h4>
+<br>
+<ul class="list-group" id="autores-table">
+    {% for obj in object_list %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{% url 'autor-update' obj.pk %}">{{ obj.nome }}</a>
+        <span class="badge badge-primary badge-pill">Idade: {{ obj.idade }}</span>
+    </li>
+    {% endfor %}
+</ul>
+<!-- fim list-group dos autores --!>
+
+<!-- --!>
+<!-- --!>
+{% endblock content %}

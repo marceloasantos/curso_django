@@ -1,0 +1,41 @@
+{% extends 'estoque/base.html' %}
+{% block content %}
+
+<div class = "container">
+    <form method="GET"> 
+        <div class="grouped">
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-submit"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+</div>
+<br>
+<h4>{{ page_info }}</h4>
+<br>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col"><a class="fa fa-cog"></a></th>
+            <th scope="col">Nome</th>
+            <th scope="col">Páginas</th>
+            <th scope="col">Autor(es)</th>
+            <th scope="col">Editora</th>
+            <th scope="col">Data Publi.</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in object_list %}
+        <tr>
+            <td><a href="{% url 'livro-delete' obj.pk %}" class="fa fa-trash" style="font-color:black"></td>
+            <th scope="row" style="text-align:left"><a href="{% url 'livro-update' obj.pk %}">{{ obj.nome }}</a></th>
+            <td>{{ obj.paginas }}</td>
+            <td>{% for autores in obj.autores.all %}{{ autores.nome }}{% endfor %}</td>
+            <td>{{ obj.editora }}</td>
+            <td>{{ obj.data_pub }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</ul>
+{% endblock content %}
